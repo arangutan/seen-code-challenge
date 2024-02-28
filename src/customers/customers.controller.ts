@@ -5,7 +5,6 @@ import { CustomersService } from './customers.service';
 export class CustomersController {
   constructor(private readonly customerService: CustomersService) {}
 
-  @Get('')
   @Get('transactions')
   getTransactions() {
     return this.customerService.getAllTransactions();
@@ -13,7 +12,6 @@ export class CustomersController {
 
   @Get('transactions/:id')
   getTransactionsByCustomer(@Param('id') id: string) {
-    console.log(id);
-    return this.customerService.getAllTransactions();
+    return this.customerService.getAllTransactionsByUser(id);
   }
 }
