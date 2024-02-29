@@ -5,7 +5,7 @@ import { CustomersService } from './customers.service';
 export class CustomersController {
   constructor(private readonly customerService: CustomersService) {}
 
-  @Get('transactions')
+  @Get(['', 'transactions'])
   getTransactions() {
     return this.customerService.getAllTransactions();
   }
