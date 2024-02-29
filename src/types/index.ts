@@ -15,3 +15,8 @@ export interface Timeline {
   status: string;
   amount: number;
 }
+
+export interface RelatedCustomer {
+  relatedCustomerId: number;
+  relationType: string;
+}

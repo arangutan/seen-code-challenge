@@ -1,5 +1,5 @@
 import { Transaction } from 'src/providers/http/dto';
-import { consolidatedTrx } from './getCustomerTrx';
+import { findConsolidatedTrx } from './getCustomerTrx';
 
 const transactions: Transaction[] = [
   {
@@ -153,14 +153,14 @@ const transactions: Transaction[] = [
 describe('Test cases for consolidatedTrx', () => {
   it('should consolidate transactions by customerId', () => {
     const customerId = 1; // Assuming this customerId is present in the transactions mock
-    const result = consolidatedTrx(transactions, customerId);
+    const result = findConsolidatedTrx(transactions, customerId);
     expect(result.transactions).toBeInstanceOf(Array);
     // More detailed checks can be added here
   });
 
   it('should correctly handle transaction lifecycle states', () => {
     const customerId = 1;
-    const result = consolidatedTrx(transactions, customerId);
+    const result = findConsolidatedTrx(transactions, customerId);
     result.transactions.forEach((trx) => {
       expect(trx.status).not.toBe('PENDING');
       trx.timeline.forEach((tl) => {
@@ -171,7 +171,7 @@ describe('Test cases for consolidatedTrx', () => {
 
   it('should correctly build the transaction timeline', () => {
     const customerId = 1;
-    const result = consolidatedTrx(transactions, customerId);
+    const result = findConsolidatedTrx(transactions, customerId);
     result.transactions.forEach((trx) => {
       expect(trx.timeline.length).toBeGreaterThan(0);
       // Ensure the timeline is in chronological order
@@ -187,7 +187,7 @@ describe('Test cases for consolidatedTrx', () => {
 
   it('should return an empty array if the customer has no transactions', () => {
     const customerId = 999; // Assuming this customerId is not present in the transactions mock
-    const result = consolidatedTrx(transactions, customerId);
+    const result = findConsolidatedTrx(transactions, customerId);
     expect(result.transactions).toEqual([]);
   });
 });

@@ -12,7 +12,7 @@ function getStatusTrx(trxStatus: string) {
     : trxStatus.toUpperCase();
 }
 
-export function consolidatedTrx(
+export function findConsolidatedTrx(
   transactions: Transaction[],
   customerId: number,
 ): { transactions: ConsolidatedTransaction[] } {

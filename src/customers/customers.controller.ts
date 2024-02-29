@@ -12,6 +12,11 @@ export class CustomersController {
 
   @Get('transactions/:id')
   getTransactionsByCustomer(@Param('id') id: string) {
-    return this.customerService.getAllTransactionsByUser(id);
+    return this.customerService.getAllTransactionsByCustomer(id);
+  }
+
+  @Get('related-transactions/:id')
+  getRelatedCustomersByTrxType(@Param('id') id: string) {
+    return this.customerService.getRelatedByCustomerByTrxType(id);
   }
 }

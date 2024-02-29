@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { HttpServiceRequest } from 'src/providers/http/http.service';
-import { consolidatedTrx } from 'src/utils/getCustomerTrx';
+import { findConsolidatedTrx, findRelatedCustomers } from 'src/utils';
 
 @Injectable()
 export class CustomersService {
@@ -10,9 +10,15 @@ export class CustomersService {
     return this.httpServiceRequest.getAllTransactions();
   }
 
-  async getAllTransactionsByUser(id: string) {
+  async getAllTransactionsByCustomer(id: string) {
     const transaccions = await this.httpServiceRequest.getAllTransactions();
 
-    return consolidatedTrx(transaccions, parseInt(id));
+    return findConsolidatedTrx(transaccions, parseInt(id));
+  }
+
+  async getRelatedByCustomerByTrxType(id: string) {
+    const transaccions = await this.httpServiceRequest.getAllTransactions();
+
+    return findRelatedCustomers(transaccions, parseInt(id));
   }
 }
